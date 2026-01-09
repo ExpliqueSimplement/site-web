@@ -10,6 +10,8 @@ const ARTICLES_DIR = path.join(DIST_DIR, "articles");
 const TEMPLATE_PATH = path.join(SRC_DIR, "template.html");
 const ARTICLES_JSON_PATH = path.join(SRC_DIR, "articles.json");
 
+const generateSitemap = require("./generate-sitemap");
+
 // ===== UTILS =====
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {
@@ -182,6 +184,7 @@ function build() {
   copyDir(path.join(ROOT, "public"), path.join(DIST_DIR, "public"));
 
   console.log("✅ Site généré avec succès.");
+  generateSitemap();
 }
 
 build();
