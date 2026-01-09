@@ -148,6 +148,24 @@ function generateIndex(site, articles) {
   fs.writeFileSync(path.join(DIST_DIR, "index.html"), indexHtml, "utf-8");
 }
 
+function copyDir(src, dest) {
+  if (!fs.existsSync(src)) return;
+
+  ensureDir(dest);
+
+  fs.readdirSync(src).forEach(file => {
+    const srcPath = path.join(src, file);
+    const destPath = path.join(dest, file);
+
+    if (fs.statSync(srcPath).isDirectory()) {
+      copyDir(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  });
+}
+
+
 // ===== MAIN =====
 function build() {
   console.log("🔨 Génération du site...");
@@ -160,6 +178,8 @@ function build() {
 
   generateArticles(data.site, data.articles, template);
   generateIndex(data.site, data.articles);
+
+  copyDir(path.join(ROOT, "public"), path.join(DIST_DIR, "public"));
 
   console.log("✅ Site généré avec succès.");
 }
