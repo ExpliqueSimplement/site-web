@@ -1,0 +1,60 @@
+{
+  "site": {
+    "name": "ExpliqueSimplement",
+    "baseUrl": "https://expliquesimplement.netlify.app",
+    "language": "fr"
+  },
+  "articles": [
+    {
+      "id": "A1",
+      "title": "Pourquoi procrastine-t-on ?",
+      "slug": "pourquoi-procrastine-t-on",
+      "description": "La procrastination est un comportement courant. Découvre pourquoi notre cerveau repousse certaines tâches et comment cela fonctionne.",
+      "category": "Psychologie",
+      "section": "A",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "La procrastination consiste à remettre volontairement à plus tard une tâche importante, même en sachant que cela peut avoir des conséquences négatives."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ce comportement est souvent lié au fonctionnement du cerveau, notamment à la recherche de gratification immédiate."
+        },
+        {
+          "type": "link",
+          "text": "Ce mécanisme est proche de celui expliqué dans l’article sur la motivation.",
+          "target": "A2"
+        }
+      ],
+      "related": ["A2", "A3"],
+      "published": true
+    },
+
+    {
+      "id": "A2",
+      "title": "Comment fonctionne la motivation ?",
+      "slug": "comment-fonctionne-la-motivation",
+      "description": "La motivation influence nos actions quotidiennes. Comprends les mécanismes biologiques et psychologiques derrière elle.",
+      "category": "Psychologie",
+      "section": "A",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "La motivation est un ensemble de processus biologiques et psychologiques qui déclenchent, orientent et maintiennent nos comportements."
+        },
+        {
+          "type": "paragraph",
+          "text": "Elle dépend notamment de la dopamine, un neurotransmetteur lié au plaisir et à la récompense."
+        },
+        {
+          "type": "link",
+          "text": "La procrastination est directement liée à ces mécanismes.",
+          "target": "A1"
+        }
+      ],
+      "related": ["A1", "A3"],
+      "published": true
+    }
+  ]
+}

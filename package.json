@@ -1,0 +1,8 @@
+{
+  "name": "explique-simplement",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node src/generate.js"
+  }
+}
