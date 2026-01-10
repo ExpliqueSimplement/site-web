@@ -120,6 +120,7 @@ function generateIndex(site, articles) {
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="NEFillxL9gfAChEdWh8GHgURNu0TiL3G6j7dV38C9BI" />
   <title>${site.name}</title>
   <meta name="description" content="Des explications simples et accessibles sur des sujets du quotidien." />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
