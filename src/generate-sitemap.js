@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const articles = require("./articles.json");
 
-const SITE_URL = "https://explique-simplement.netlify.app";
+const SITE_URL = "https://expliquesimplement.netlify.app";
 const DIST_DIR = path.join(__dirname, "..", "dist");
 
 function generateSitemap() {
