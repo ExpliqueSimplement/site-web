@@ -36,36 +36,14 @@ function escapeHtml(str) {
 }
 
 // ===== CONTENT RENDERING =====
-function renderContent(blocks, articlesMap) {
-  return blocks
-    .map(block => {
-      switch (block.type) {
-        case "paragraph":
-          return `<p>${escapeHtml(block.text)}</p>`;
-
-        case "link": {
-          const targetArticle = articlesMap[block.target];
-          if (!targetArticle) return "";
-          return `
-            <p>
-              <a href="/articles/${targetArticle.slug}.html">
-                ${escapeHtml(block.text)}
-              </a>
-            </p>
-          `;
-        }
-
-        default:
-          return "";
-      }
-    })
-    .join("\n");
+function renderContent(contentArray) {
+  return contentArray.join("\n");
 }
 
-function renderRelatedLinks(relatedIds, articlesMap) {
-  return relatedIds
-    .map(id => {
-      const article = articlesMap[id];
+function renderRelatedLinks(relatedSlugs, articlesMap) {
+  return relatedSlugs
+    .map(slug => {
+      const article = articlesMap[slug];
       if (!article) return "";
       return `<li><a href="/articles/${article.slug}.html">${escapeHtml(article.title)}</a></li>`;
     })
@@ -75,19 +53,17 @@ function renderRelatedLinks(relatedIds, articlesMap) {
 // ===== ARTICLE GENERATION =====
 function generateArticles(site, articles, template) {
   const articlesMap = {};
-  articles.forEach(a => (articlesMap[a.id] = a));
+  articles.forEach(a => (articlesMap[a.slug] = a));
 
-  articles
-    .filter(article => article.published)
-    .forEach(article => {
-      const contentHtml = renderContent(article.content, articlesMap);
+  articles.forEach(article => {
+      const contentHtml = renderContent(article.content);
       const relatedHtml = renderRelatedLinks(article.related || [], articlesMap);
 
       const canonicalUrl = `${site.baseUrl}/articles/${article.slug}.html`;
 
       let html = template
         .replace(/{{title}}/g, article.title)
-        .replace(/{{description}}/g, article.description)
+        .replace(/{{description}}/g, article.excerpt || "")
         .replace(/{{category}}/g, article.category)
         .replace(/{{content}}/g, contentHtml)
         .replace(/{{relatedLinks}}/g, relatedHtml)
@@ -101,16 +77,14 @@ function generateArticles(site, articles, template) {
 
 // ===== INDEX GENERATION =====
 function generateIndex(site, articles) {
-  const published = articles.filter(a => a.published);
-
-  const listItems = published
+  const listItems = articles
     .map(
       a => `
       <article class="index-article">
         <h2>
           <a href="/articles/${a.slug}.html">${escapeHtml(a.title)}</a>
         </h2>
-        <p>${escapeHtml(a.description)}</p>
+        <p>${escapeHtml(a.excerpt || "")}</p>
       </article>
     `
     )
